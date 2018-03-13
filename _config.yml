@@ -1,14 +1,15 @@
-title:             Clean Blog
-email:             your-email@example.com
-description:       A Blog Theme by Start Bootstrap
-author:            Start Bootstrap
+title:             Smart Objects and Stupid People
+email:             pseudogram@gmail.com
+description:       >-
+  A blog about trying to make smarter machines, so people need not apply.
+author:            David Attlee
 baseurl:           ""
-url:               ""
+url:               "https://pseudogram.github.io"
 
 # Social Profiles
-twitter_username:  SBootstrap
-github_username:   BlackrockDigital
-facebook_username: StartBootstrap
+twitter_username:  attleed
+github_username:   pseudogram
+# facebook_username:
 
 # Build settings
 markdown:          kramdown
