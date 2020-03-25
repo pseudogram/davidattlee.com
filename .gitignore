@@ -3,8 +3,5 @@ _site
 .jekyll-metadata
 .DS_Store
 
-# Used by me to store images and such
-my_content_in_progress/
-
 # Used by docker to maintain state of ghost blog
 data/
