@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>What&#x27;s the difference between Managed or Unmanaged Resource?</title>
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=58601151ff" />
+
+	<link rel="shortcut icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://www.davidattlee.com/managed-vs-unmanaged-resources/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="http://www.davidattlee.com/managed-vs-unmanaged-resources/amp/" />
+    
+    <meta property="og:site_name" content="David Attlee" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="What&#x27;s the difference between Managed or Unmanaged Resource?" />
+    <meta property="og:description" content="When programming there is the concept managed and unmanaged resources. Simply, a managed resource are things that your garbage collector can see and aid in managing memory. Thus when a program is done with it, the garbage collector knows to remove all references.  Unmanaged resources include: FilesOpen connections /ports" />
+    <meta property="og:url" content="http://www.davidattlee.com/managed-vs-unmanaged-resources/" />
+    <meta property="og:image" content="http://www.davidattlee.com/content/images/2020/03/garbage-collection.jpeg" />
+    <meta property="article:published_time" content="2018-09-25T13:00:00.000Z" />
+    <meta property="article:modified_time" content="2020-03-25T21:19:39.000Z" />
+    <meta property="article:tag" content="Programming" />
+    
+    <meta property="article:publisher" content="https://www.facebook.com/ghost" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="What&#x27;s the difference between Managed or Unmanaged Resource?" />
+    <meta name="twitter:description" content="When programming there is the concept managed and unmanaged resources. Simply, a managed resource are things that your garbage collector can see and aid in managing memory. Thus when a program is done with it, the garbage collector knows to remove all references.  Unmanaged resources include: FilesOpen connections /ports" />
+    <meta name="twitter:url" content="http://www.davidattlee.com/managed-vs-unmanaged-resources/" />
+    <meta name="twitter:image" content="http://www.davidattlee.com/content/images/2020/03/garbage-collection.jpeg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="David Attlee" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Programming" />
+    <meta name="twitter:site" content="@tryghost" />
+    <meta property="og:image:width" content="1447" />
+    <meta property="og:image:height" content="967" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "David Attlee",
+        "url": "http://www.davidattlee.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://www.davidattlee.com/content/images/2020/03/Monkey-icon-and-name.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "David Attlee",
+        "url": "http://www.davidattlee.com/author/david/",
+        "sameAs": []
+    },
+    "headline": "What&#x27;s the difference between Managed or Unmanaged Resource?",
+    "url": "http://www.davidattlee.com/managed-vs-unmanaged-resources/",
+    "datePublished": "2018-09-25T13:00:00.000Z",
+    "dateModified": "2020-03-25T21:19:39.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://www.davidattlee.com/content/images/2020/03/garbage-collection.jpeg",
+        "width": 1447,
+        "height": 967
+    },
+    "keywords": "Programming",
+    "description": "When programming there is the concept managed and unmanaged resources. Simply, a\nmanaged resource are things that your garbage collector can see and aid in\nmanaging memory. Thus when a program is done with it, the garbage collector\nknows to remove all references.\n\n\n\nUnmanaged resources include:\n\n * Files\n * Open connections /ports",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://www.davidattlee.com/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.11" />
+    <link rel="alternate" type="application/rss+xml" title="David Attlee" href="http://www.davidattlee.com/rss/" />
+</head>
+
+<body class="post-template tag-programming">
+
+	<div class="nav-header">
+		<nav class="nav-wrapper">
+				<span class="logo">
+					<a href="http://www.davidattlee.com" title="Home"><img src="/content/images/2020/03/Monkey-icon-and-name.png" alt="Logo" /></a>
+				</span>
+				<ul role="navigation" aria-label="Navigation">
+		<li class="nav-home" role="presentation"><a href="http://www.davidattlee.com/"><span>Home</span></a></li>
+		<li class="nav-programming" role="presentation"><a href="http://www.davidattlee.com/tag/programming/"><span>Programming</span></a></li>
+		<li class="nav-contact-me" role="presentation"><a href="https://twitter.com/justaboutdavid"><span>Contact Me</span></a></li>
+</ul>
+
+				<ul class="nav-side">
+					<li class="nav-twitter"><a title="Twitter" href="https://twitter.com/tryghost" title="@tryghost" target="_blank"><i class="icon icon-twitter"></i><span>Twitter</span></a></li>
+					<li class="nav-facebook"><a title="Facebook" href="https://www.facebook.com/ghost" title="ghost" target="_blank"><i class="icon icon-facebook"></i><span>Facebook</span></a></li>
+					<li class="nav-rss"><a title="RSS" href="http://www.davidattlee.com/rss/" target="_blank"><i class="icon icon-rss"></i><span>RSS</span></a></li>
+					<li class="nav-search" style="display: none;"><a title="Search"><i class="icon icon-search"></i><span>Search</span></a></li>
+				</ul>
+		</nav>
+
+		<div class="nav-wrapper-control">
+			<div class="inner">
+				<a class="nav-menu"><i class="icon icon-menu"></i>Menu</a>
+				<a class="nav-search" style="display: none;" title="Search"><i class="icon icon-search"></i><span>Search</span></a>
+			</div>
+		</div>
+	</div>
+	<div class="nav-close"></div>
+
+	<section class="page-wrapper">
+
+		
+
+<div class="progress-container">
+	<span class="progress-bar"></span>
+</div>
+
+<header class="post-header  has-cover ">
+	<div class="inner">
+		<span class="post-info">
+			<span class="post-type">Article</span>
+			<span class="post-count">Programming</span>
+		</span>
+		<h1 class="post-title">What&#x27;s the difference between Managed or Unmanaged Resource?</h1>
+		<div class="post-meta">
+			<div class="post-meta-avatars">
+					<figure class="post-meta-avatar avatar">
+					</figure>
+			</div>
+			<h4 class="post-meta-author"><a href="/author/david/">David Attlee</a></h4>
+			<time datetime="25-09-2018">25 Sep 2018</time> &bull; 1 min read
+		</div>
+		<div class="post-cover cover">
+			<img
+			srcset="/content/images/size/w320/2020/03/garbage-collection.jpeg 320w,
+              /content/images/size/w640/2020/03/garbage-collection.jpeg 640w,
+              /content/images/size/w960/2020/03/garbage-collection.jpeg 960w,
+              /content/images/size/w1920/2020/03/garbage-collection.jpeg 1920w"
+      src="/content/images/size/w1920/2020/03/garbage-collection.jpeg"
+			alt="What&#x27;s the difference between Managed or Unmanaged Resource?" />
+		</div>
+	</div>
+</header>
+
+<main class="content" role="main">
+	<article class="post tag-programming">
+		<div class="inner">
+
+			<section class="post-content">
+				<p>When programming there is the concept managed and unmanaged resources. Simply, a managed resource are things that your garbage collector can see and aid in managing memory. Thus when a program is done with it, the garbage collector knows to remove all references.</p><p></p><p>Unmanaged resources include:</p><ul><li>Files</li><li>Open connections /ports</li></ul>
+			</section>
+
+			<section class="post-footer">
+
+				<div class="post-share">
+					<span class="post-info-label">Share</span>
+					<a title="Twitter" class="twitter" href="https://twitter.com/share?text=What&#x27;s the difference between Managed or Unmanaged Resource?&url=http://www.davidattlee.com/managed-vs-unmanaged-resources/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+						<i class="icon icon-twitter"></i><span class="hidden">Twitter</span>
+					</a>
+					<a title="Facebook" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.davidattlee.com/managed-vs-unmanaged-resources/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+						<i class="icon icon-facebook"></i><span class="hidden">Facebook</span>
+					</a>
+					<a title="LinkedIn" class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.davidattlee.com/managed-vs-unmanaged-resources//&amp;title=What&#x27;s the difference between Managed or Unmanaged Resource?" onclick="window.open(this.href, 'linkedin-share', 'width=930,height=720');return false;">
+						<i class="icon icon-linkedin"></i><span class="hidden">LinkedIn</span>
+					</a>
+					<a title="Email" class="email" href="mailto:?subject=What&#x27;s the difference between Managed or Unmanaged Resource?&amp;body=http://www.davidattlee.com/managed-vs-unmanaged-resources/">
+						<i class="icon icon-mail"></i><span class="hidden">Email</span>
+					</a>
+				</div>
+
+				<aside class="post-tags">
+					<span class="post-info-label">Topic</span>
+					<a href="/tag/programming/">Programming</a>
+				</aside>
+
+			</section>
+
+
+			<section class="post-comments">
+				<a id="show-disqus" class="post-comments-activate">Show Comments</a>
+			   <div id="disqus_thread"></div>
+			</section>
+
+
+			<aside class="post-nav">
+				<div class="clear"></div>
+			</aside>
+
+
+		</div>
+	</article>
+</main>
+
+
+
+
+		<div id="search" class="container">
+			<div class="content">
+				<div class="blog-header">
+					<div class="inner">
+						<div class="archive archive-search box archive-box">
+							<form class="search">
+								<input type="text" id="search-field" placeholder="Search&#8230;" />
+								<input type="submit" value="search" />
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id="results"></div>
+			</div>
+			<div class="search-close"></div>
+		</div>
+
+		<div class="nav-footer">
+			<nav class="nav-wrapper">
+				<span class="nav-copy">David Attlee &copy; 2020</span>
+				<span class="nav-credits">Published with <a href="https://ghost.org">Ghost</a> &bull; Theme <a href="https://github.com/zutrinken/attila">Attila</a></span>
+			</nav>
+		</div>
+
+	</section>
+
+	<script type="text/javascript" src="/assets/js/script.js?v=58601151ff"></script>
+
+	<script>
+  $(document).ready(function () {
+		var viewport = $(window);
+		var post = $('.post-content');
+		// Responsive videos with fitVids
+    post.fitVids();
+		// Format code blocks and add line numbers
+		function codestyling() {
+	    $('pre code').each(function(i, e) {
+				// Code highlight
+	      hljs.highlightBlock(e);
+	      // No lines for plain text blocks
+	      if (!$(this).hasClass('language-text')) {
+	        var code = $(this);
+					// Calculate amount of lines
+	        var lines = code.html().split(/\n(?!$)/g).length;
+	        var numbers = [];
+	        if (lines > 1) {
+	          lines++;
+	        }
+	        for (i = 1; i < lines; i++) {
+	          numbers += '<span class="line" aria-hidden="true">' + i + '</span>';
+	        }
+	        code.parent().append('<div class="lines">' + numbers + '</div>');
+	      }
+	    });
+	  }
+	  codestyling();
+		// Reading progress bar on window top
+	  function readingProgress() {
+			var postBottom = post.offset().top + post.height();
+			var viewportHeight = viewport.height();
+      var progress = 100 - (((postBottom - (viewport.scrollTop() + viewportHeight) + viewportHeight / 3) / (postBottom - viewportHeight + viewportHeight / 3)) * 100);
+      $('.progress-bar').css('width', progress + '%');
+      (progress > 100) ? $('.progress-container').addClass('complete'): $('.progress-container').removeClass('complete');
+	  }
+	  readingProgress();
+		// Trigger reading progress
+	  viewport.on({
+	    'scroll': function() {
+	      readingProgress();
+	    },
+	    'resize': function() {
+	      readingProgress();
+	    },
+	    'orientationchange': function() {
+	      readingProgress();
+	    }
+	  });
+		// Check if disqus is defined by code injection
+		if (typeof disqus === 'undefined') {
+			// hide comment section
+	    $('.post-comments').css({
+	      'display': 'none'
+	    });
+	  } else {
+	    $('#show-disqus').on('click', function() {
+	      $.ajax({
+	        type: "GET",
+	        url: "//" + disqus + ".disqus.com/embed.js",
+	        dataType: "script",
+	        cache: true
+	      });
+	      $(this).parent().addClass('activated');
+	    });
+	  }
+  });
+</script>
+
+
+	
+
+</body>
+</html>
