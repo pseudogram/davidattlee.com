@@ -1,0 +1,4 @@
+User-agent: *
+Sitemap: http://davidattlee.com/sitemap.xml
+Disallow: /ghost/
+Disallow: /p/
