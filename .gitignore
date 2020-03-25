@@ -2,3 +2,9 @@ _site
 .sass-cache
 .jekyll-metadata
 .DS_Store
+
+# Used by me to store images and such
+Content/
+
+# Used by docker to maintain state of ghost blog
+data/
