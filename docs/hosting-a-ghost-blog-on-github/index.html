@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Hosting a Ghost blog on GitHub</title>
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=fd03cb8458" />
+
+	<link rel="shortcut icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="/hosting-a-ghost-blog-on-github/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="/hosting-a-ghost-blog-on-github/amp/" />
+    
+    <meta property="og:site_name" content="David Attlee" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Hosting a Ghost blog on GitHub" />
+    <meta property="og:description" content="I moved my blog from AWS to GitHub because it&#x27;s cheaper and easier to maintain a website built to last. GitHub pages are amazing and Free! Here&#x27;s how to get started." />
+    <meta property="og:url" content="/hosting-a-ghost-blog-on-github/" />
+    <meta property="og:image" content="/content/images/2020/04/ghost_docker-1.png" />
+    <meta property="article:published_time" content="2020-04-21T06:24:42.000Z" />
+    <meta property="article:modified_time" content="2020-04-21T06:24:42.000Z" />
+    <meta property="article:tag" content="Programming" />
+    <meta property="article:tag" content="Ghost" />
+    <meta property="article:tag" content="Docker" />
+    <meta property="article:tag" content="GitHub" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hosting a Ghost blog on GitHub" />
+    <meta name="twitter:description" content="I moved my blog from AWS to GitHub because it&#x27;s cheaper and easier to maintain a website built to last. GitHub pages are amazing and Free! Here&#x27;s how to get started." />
+    <meta name="twitter:url" content="/hosting-a-ghost-blog-on-github/" />
+    <meta name="twitter:image" content="/content/images/2020/04/ghost_docker-1.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="David Attlee" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Programming, Ghost, Docker, GitHub" />
+    <meta name="twitter:site" content="@justaboutdavid" />
+    <meta name="twitter:creator" content="@justaboutdavid" />
+    <meta property="og:image:width" content="1240" />
+    <meta property="og:image:height" content="700" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "David Attlee",
+        "url": "/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/content/images/2020/03/Monkey-icon-and-name.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "David Attlee",
+        "url": "/author/david/",
+        "sameAs": [
+            "https://twitter.com/justaboutdavid"
+        ]
+    },
+    "headline": "Hosting a Ghost blog on GitHub",
+    "url": "/hosting-a-ghost-blog-on-github/",
+    "datePublished": "2020-04-21T06:24:42.000Z",
+    "dateModified": "2020-04-21T06:24:42.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/content/images/2020/04/ghost_docker-1.png",
+        "width": 1240,
+        "height": 700
+    },
+    "keywords": "Programming, Ghost, Docker, GitHub",
+    "description": "I moved my blog from AWS to GitHub because it&#x27;s cheaper and easier to maintain a website built to last. GitHub pages are amazing and Free! Here&#x27;s how to get started.",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 3.11" />
+    <link rel="alternate" type="application/rss+xml" title="David Attlee" href="/rss/" />
+</head>
+
+<body class="post-template tag-programming tag-ghost-tag tag-docker tag-github">
+
+	<div class="nav-header">
+		<nav class="nav-wrapper">
+				<span class="logo">
+					<a href="" title="Home"><img src="/content/images/2020/03/Monkey-icon-and-name.png" alt="Logo" /></a>
+				</span>
+				<ul role="navigation" aria-label="Navigation">
+		<li class="nav-home" role="presentation"><a href="https://davidattlee.com/"><span>Home</span></a></li>
+		<li class="nav-programming" role="presentation"><a href="https://davidattlee.com/tag/programming/"><span>Programming</span></a></li>
+		<li class="nav-contact-me" role="presentation"><a href="https://twitter.com/justaboutdavid"><span>Contact Me</span></a></li>
+</ul>
+
+				<ul class="nav-side">
+					<li class="nav-twitter"><a title="Twitter" href="https://twitter.com/justaboutdavid" title="@justaboutdavid" target="_blank"><i class="icon icon-twitter"></i><span>Twitter</span></a></li>
+					<li class="nav-rss"><a title="RSS" href="/rss/" target="_blank"><i class="icon icon-rss"></i><span>RSS</span></a></li>
+					<li class="nav-search" style="display: none;"><a title="Search"><i class="icon icon-search"></i><span>Search</span></a></li>
+				</ul>
+		</nav>
+
+		<div class="nav-wrapper-control">
+			<div class="inner">
+				<a class="nav-menu"><i class="icon icon-menu"></i>Menu</a>
+				<a class="nav-search" style="display: none;" title="Search"><i class="icon icon-search"></i><span>Search</span></a>
+			</div>
+		</div>
+	</div>
+	<div class="nav-close"></div>
+
+	<section class="page-wrapper">
+
+		
+
+<div class="progress-container">
+	<span class="progress-bar"></span>
+</div>
+
+<header class="post-header  has-cover ">
+	<div class="inner">
+		<span class="post-info">
+			<span class="post-type">Article</span>
+			<span class="post-count">Programming</span>
+		</span>
+		<h1 class="post-title">Hosting a Ghost blog on GitHub</h1>
+		<div class="post-meta">
+			<div class="post-meta-avatars">
+					<figure class="post-meta-avatar avatar">
+					</figure>
+			</div>
+			<h4 class="post-meta-author"><a href="/author/david/">David Attlee</a></h4>
+			<time datetime="21-04-2020">21 Apr 2020</time> &bull; 4 min read
+		</div>
+		<div class="post-cover cover">
+			<img
+			srcset="/content/images/size/w320/2020/04/ghost_docker-1.png 320w,
+              /content/images/size/w640/2020/04/ghost_docker-1.png 640w,
+              /content/images/size/w960/2020/04/ghost_docker-1.png 960w,
+              /content/images/size/w1920/2020/04/ghost_docker-1.png 1920w"
+      src="/content/images/size/w1920/2020/04/ghost_docker-1.png"
+			alt="Hosting a Ghost blog on GitHub" />
+		</div>
+	</div>
+</header>
+
+<main class="content" role="main">
+	<article class="post tag-programming tag-ghost-tag tag-docker tag-github featured">
+		<div class="inner">
+
+			<section class="post-content">
+				<p>I recently moved my blog from AWS to GitHub because it's cheaper and easier to maintain a website <a href="https://jeffhuang.com/designed_to_last/">built to last</a>. Unfortunately, I didn't back up my old blog (rookie mistake, I know) before deleting it. So I'm trying to rewrite some posts based on notes I have in Google Docs/Evernote/Bear. Just bear with me until May. I  read how to do most of this from another blog, but I lost the link. 🤷🏾‍♂️</p><p>Before reading on, there are a few things you may need to understand a little first. None require much reading as I'll explain all the commands I use.</p><ol><li><a href="https://ghost.org/">Ghost</a> blog</li><li><a href="http://github.com">GitHub</a> +<a href="https://guide.freecodecamp.org/git/"> Git</a></li><li><a href="http://docker.com">Docker</a></li><li>Basic bash commands ( <code>cd</code>, <code>mkdir</code> )</li></ol><h3 id="overview">Overview</h3><ol><li>Create a GitHub Repo &amp; Turn on GitHub Pages</li><li>Install Prerequisites</li><li>Running Ghost, using Docker</li><li>Generate a static website</li></ol><h2 id="step-1-create-a-github-repo-turn-on-github-pages">Step 1: Create a GitHub Repo &amp; Turn on GitHub Pages</h2><p>GitHub pages are amazing. They allow you to host a static website in a repo for <strong>free</strong>! Considering that GitHub is also currently home to the largest source of open source code <strong>and</strong> Microsoft owns it, you can put your worries to rest with regards to its spontaneous collapse.</p><ul><li>First, create a repo. If you're using the default GitHub pages URL, then you'll need to name your repo <em>your-github-username.github.io</em> (where my username is pseudogram my repository would be called psuedogram.github.io). Otherwise, if you have a domain, you can name the repo whatever you like.</li><li>In the repo, select the Settings tab.</li></ul><figure class="kg-card kg-image-card"><img src="/content/images/2020/04/image.png" class="kg-image"></figure><ul><li>Scroll down to the GitHub Pages section, and select a source. Here I chose the <strong>master branch /docs </strong>folder for organisation purposes (until a docs folder exists, you won't be able to choose this option).</li></ul><figure class="kg-card kg-image-card"><img src="/content/images/2020/04/Screenshot-2020-03-26-at-11.26.26.png" class="kg-image"></figure><ul><li>Below you'll see an option to add your custom domain [<a href="https://benwiz.io/blog/deploy-github-pages-with-aws-route-53-and-https/">see for AWS</a>] and an option to enforce HTTPS.</li><li>Then clone this repo onto your local machine.</li></ul><h2 id="step-1-install-prerequisites">Step 1: Install Prerequisites</h2><p>There was a python project called <a href="https://pypi.org/project/buster/">Buster</a> that allowed you to generate a static version of a website, but as it was left unsupported someone built a similar tool in node - aptly named the <a href="https://github.com/pseudogram/ghost-static-site-generator">Ghost Static Site Generator</a> (GSSG). I've forked the repo in the off chance that I feel like fixing a bug, or it gets removed [though I doubt it].</p><p>Requirements:</p><ul><li>Node v8 LTS</li><li>wget v1.16</li></ul><p>If you don't have the requirements, and you're a Mac user install <a href="https://brew.sh/">Homebrew</a> because it's a godsend.</p><pre><code class="language-bash"># Install Node
+brew install node
+
+# Install wget
+brew install wget
+
+# Install the static site generator using npm
+npm install -g ghost-static-site-generator</code></pre><h2 id="step-3-running-ghost-using-docker">Step 3: Running Ghost, using Docker</h2><p>Using Docker simplifies the process of setting up Ghost to near nothing. Decide on a folder to which you want to save all your websites state information (I chose the same repo as my website - hence why I chose to point towards the docs file earlier, in GitHub).</p><p>In your local terminal, navigate to your cloned website repo, and create a folder called data.</p><pre><code>cd \path\to\repo
+
+mkdir data</code></pre><p>This next command pulls a <a href="https://hub.docker.com/_/ghost">ghost image</a> from Docker Hub and starts a container [at the time of writing 3.13.3-alpine is the latest image tag]. It's better to declare the version rather than using the tag <strong>latest</strong>, as it may produce version conflicts with your saved content. Below I'll also explain each part of the command.</p><pre><code class="language-bash"># run container
+docker run -d --name ghost -e url= -p 3001:2368 -v /path/to/repo/data:/var/lib/ghost/content ghost:3.13.3-alpine
+
+
+run  # starts a Docker container, and if the image doesn't exist locally it attempts to pull it from Docker Hub
+
+-d  # runs the container in a detached state (in the background)
+
+--name  # assigns the container a name for easy access (rather than an ID)
+
+-e  # sets environment variables
+url =  # Used by Ghost to display previews
+
+-v /path/to/repo/data:/var/lib/ghost/content # Mounts the content from data into the  data from local path given into ghost content file, saving state
+
+ghost: 3.13.3-alpine # creates an image of Ghost using specific image label</code></pre><p>Once you've started the container, you should be able to access your ghost blog at <em>localhost:3001.</em> Then, following the <a href="https://ghost.org/docs/install/ubuntu/">standard instructions</a>, navigate to the admin console by adding <em>/ghost </em>to the URL. Once you're ready, generate a new version of your static website [go to step 4].</p><p>You may want to shut down your unused docker containers — when I leave docker running on and Mac, it turns into a little portable radiator.</p><pre><code class="language-bash">docker container rm --force ghost  # shut down the container, using the label given</code></pre><p>Finally, the next time you start your container there should be no need to enter the long command from earlier — instead, you can start the container using the label you gave the first time (in my case <em>ghost</em>).</p><pre><code class="language-bash">docker start ghost</code></pre><h2 id="step-4-generate-a-static-website">Step 4: Generate a Static Website</h2><p>Once you're ready to save the state of your website — assuming, you're still in website repo, and you've published all of the posts you wish to show the world — you can generate the website using the tool GSSG installed earlier. I've tried a variation of the arguments and below is the best combo I found.</p><pre><code class="language-bash">gssg --domain  --url http://www.your-website-url.com --ignore-absolute-paths --dest docs
+
+
+gssg  # run the ghost static site generator
+--domain   # scrape the website from this URL
+
+--url http://www.your-website-url.com  # replace any references to your local address with this URL (GitHub pages or personal domain)
+
+--ignore-absolute-paths  # swaps all domain names for relative paths, nullifying SEO
+
+--dest docs  # save the static version of the website in the docs folder</code></pre><blockquote>I found without adding `ignore-absolute-paths` that there were errors in generating the static site. One day I'll look into this bug but, for now, I'm happy.</blockquote><p>Last but not least, push your repo to GitHub. If all has gone well, you should see your website live within a couple of minutes.</p><p>I'm not adding comments or analytics to this blog, but you can always <a href="https://twitter.com/justaboutdavid">@me</a>. If you got this far, I hope I helped.</p>
+			</section>
+
+			<section class="post-footer">
+
+				<div class="post-share">
+					<span class="post-info-label">Share</span>
+					<a title="Twitter" class="twitter" href="https://twitter.com/share?text=Hosting a Ghost blog on GitHub&url=/hosting-a-ghost-blog-on-github/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+						<i class="icon icon-twitter"></i><span class="hidden">Twitter</span>
+					</a>
+					<a title="Facebook" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/hosting-a-ghost-blog-on-github/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+						<i class="icon icon-facebook"></i><span class="hidden">Facebook</span>
+					</a>
+					<a title="LinkedIn" class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=/hosting-a-ghost-blog-on-github//&amp;title=Hosting a Ghost blog on GitHub" onclick="window.open(this.href, 'linkedin-share', 'width=930,height=720');return false;">
+						<i class="icon icon-linkedin"></i><span class="hidden">LinkedIn</span>
+					</a>
+					<a title="Email" class="email" href="mailto:?subject=Hosting a Ghost blog on GitHub&amp;body=/hosting-a-ghost-blog-on-github/">
+						<i class="icon icon-mail"></i><span class="hidden">Email</span>
+					</a>
+				</div>
+
+				<aside class="post-tags">
+					<span class="post-info-label">Topic</span>
+					<a href="/tag/programming/">Programming</a> <a href="/tag/ghost-tag/">Ghost</a> <a href="/tag/docker/">Docker</a> <a href="/tag/github/">GitHub</a>
+				</aside>
+
+			</section>
+
+
+			<section class="post-comments">
+				<a id="show-disqus" class="post-comments-activate">Show Comments</a>
+			   <div id="disqus_thread"></div>
+			</section>
+
+
+			<aside class="post-nav">
+					<a class="post-nav-prev" href="/what-is-a-web-server/">
+						<section class="post-nav-teaser">
+							<i class="icon icon-arrow-right"></i>
+							<h2 class="post-nav-title">What is a Web Server?</h2>
+							<p class="post-nav-excerpt">Simply, a web server processes incoming network requests.&hellip;</p>
+							<p class="post-nav-meta"><time datetime="05-12-2018">05 Dec 2018</time></p>
+						</section>
+					</a>
+				<div class="clear"></div>
+			</aside>
+
+
+		</div>
+	</article>
+</main>
+
+
+
+
+		<div id="search" class="container">
+			<div class="content">
+				<div class="blog-header">
+					<div class="inner">
+						<div class="archive archive-search box archive-box">
+							<form class="search">
+								<input type="text" id="search-field" placeholder="Search&#8230;" />
+								<input type="submit" value="search" />
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id="results"></div>
+			</div>
+			<div class="search-close"></div>
+		</div>
+
+		<div class="nav-footer">
+			<nav class="nav-wrapper">
+				<span class="nav-copy">David Attlee &copy; 2020</span>
+				<span class="nav-credits">Published with <a href="https://ghost.org">Ghost</a> &bull; Theme <a href="https://github.com/zutrinken/attila">Attila</a></span>
+			</nav>
+		</div>
+
+	</section>
+
+	<script type="text/javascript" src="/assets/js/script.js?v=fd03cb8458"></script>
+
+	<script>
+  $(document).ready(function () {
+		var viewport = $(window);
+		var post = $('.post-content');
+		// Responsive videos with fitVids
+    post.fitVids();
+		// Format code blocks and add line numbers
+		function codestyling() {
+	    $('pre code').each(function(i, e) {
+				// Code highlight
+	      hljs.highlightBlock(e);
+	      // No lines for plain text blocks
+	      if (!$(this).hasClass('language-text')) {
+	        var code = $(this);
+					// Calculate amount of lines
+	        var lines = code.html().split(/\n(?!$)/g).length;
+	        var numbers = [];
+	        if (lines > 1) {
+	          lines++;
+	        }
+	        for (i = 1; i < lines; i++) {
+	          numbers += '<span class="line" aria-hidden="true">' + i + '</span>';
+	        }
+	        code.parent().append('<div class="lines">' + numbers + '</div>');
+	      }
+	    });
+	  }
+	  codestyling();
+		// Reading progress bar on window top
+	  function readingProgress() {
+			var postBottom = post.offset().top + post.height();
+			var viewportHeight = viewport.height();
+      var progress = 100 - (((postBottom - (viewport.scrollTop() + viewportHeight) + viewportHeight / 3) / (postBottom - viewportHeight + viewportHeight / 3)) * 100);
+      $('.progress-bar').css('width', progress + '%');
+      (progress > 100) ? $('.progress-container').addClass('complete'): $('.progress-container').removeClass('complete');
+	  }
+	  readingProgress();
+		// Trigger reading progress
+	  viewport.on({
+	    'scroll': function() {
+	      readingProgress();
+	    },
+	    'resize': function() {
+	      readingProgress();
+	    },
+	    'orientationchange': function() {
+	      readingProgress();
+	    }
+	  });
+		// Check if disqus is defined by code injection
+		if (typeof disqus === 'undefined') {
+			// hide comment section
+	    $('.post-comments').css({
+	      'display': 'none'
+	    });
+	  } else {
+	    $('#show-disqus').on('click', function() {
+	      $.ajax({
+	        type: "GET",
+	        url: "//" + disqus + ".disqus.com/embed.js",
+	        dataType: "script",
+	        cache: true
+	      });
+	      $(this).parent().addClass('activated');
+	    });
+	  }
+  });
+</script>
+
+
+	
+
+</body>
+</html>
