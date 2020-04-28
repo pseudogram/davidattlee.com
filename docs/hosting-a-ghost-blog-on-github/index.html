@@ -9,7 +9,7 @@
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=fd03cb8458" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=5c6571b1a4" />
 
 	<link rel="shortcut icon" href="/favicon.png" type="image/png" />
     <link rel="canonical" href="/hosting-a-ghost-blog-on-github/" />
@@ -23,7 +23,7 @@
     <meta property="og:url" content="/hosting-a-ghost-blog-on-github/" />
     <meta property="og:image" content="/content/images/2020/04/ghost_docker-1.png" />
     <meta property="article:published_time" content="2020-04-21T06:24:42.000Z" />
-    <meta property="article:modified_time" content="2020-04-21T06:24:42.000Z" />
+    <meta property="article:modified_time" content="2020-04-28T06:14:29.000Z" />
     <meta property="article:tag" content="Programming" />
     <meta property="article:tag" content="Ghost" />
     <meta property="article:tag" content="Docker" />
@@ -67,7 +67,7 @@
     "headline": "Hosting a Ghost blog on GitHub",
     "url": "/hosting-a-ghost-blog-on-github/",
     "datePublished": "2020-04-21T06:24:42.000Z",
-    "dateModified": "2020-04-21T06:24:42.000Z",
+    "dateModified": "2020-04-28T06:14:29.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "/content/images/2020/04/ghost_docker-1.png",
@@ -156,7 +156,7 @@
 		<div class="inner">
 
 			<section class="post-content">
-				<p>I recently moved my blog from AWS to GitHub because it's cheaper and easier to maintain a website <a href="https://jeffhuang.com/designed_to_last/">built to last</a>. Unfortunately, I didn't back up my old blog (rookie mistake, I know) before deleting it. So I'm trying to rewrite some posts based on notes I have in Google Docs/Evernote/Bear. Just bear with me until May. I  read how to do most of this from another blog, but I lost the link. 🤷🏾‍♂️</p><p>Before reading on, there are a few things you may need to understand a little first. None require much reading as I'll explain all the commands I use.</p><ol><li><a href="https://ghost.org/">Ghost</a> blog</li><li><a href="http://github.com">GitHub</a> +<a href="https://guide.freecodecamp.org/git/"> Git</a></li><li><a href="http://docker.com">Docker</a></li><li>Basic bash commands ( <code>cd</code>, <code>mkdir</code> )</li></ol><h3 id="overview">Overview</h3><ol><li>Create a GitHub Repo &amp; Turn on GitHub Pages</li><li>Install Prerequisites</li><li>Running Ghost, using Docker</li><li>Generate a static website</li></ol><h2 id="step-1-create-a-github-repo-turn-on-github-pages">Step 1: Create a GitHub Repo &amp; Turn on GitHub Pages</h2><p>GitHub pages are amazing. They allow you to host a static website in a repo for <strong>free</strong>! Considering that GitHub is also currently home to the largest source of open source code <strong>and</strong> Microsoft owns it, you can put your worries to rest with regards to its spontaneous collapse.</p><ul><li>First, create a repo. If you're using the default GitHub pages URL, then you'll need to name your repo <em>your-github-username.github.io</em> (where my username is pseudogram my repository would be called psuedogram.github.io). Otherwise, if you have a domain, you can name the repo whatever you like.</li><li>In the repo, select the Settings tab.</li></ul><figure class="kg-card kg-image-card"><img src="/content/images/2020/04/image.png" class="kg-image"></figure><ul><li>Scroll down to the GitHub Pages section, and select a source. Here I chose the <strong>master branch /docs </strong>folder for organisation purposes (until a docs folder exists, you won't be able to choose this option).</li></ul><figure class="kg-card kg-image-card"><img src="/content/images/2020/04/Screenshot-2020-03-26-at-11.26.26.png" class="kg-image"></figure><ul><li>Below you'll see an option to add your custom domain [<a href="https://benwiz.io/blog/deploy-github-pages-with-aws-route-53-and-https/">see for AWS</a>] and an option to enforce HTTPS.</li><li>Then clone this repo onto your local machine.</li></ul><h2 id="step-1-install-prerequisites">Step 1: Install Prerequisites</h2><p>There was a python project called <a href="https://pypi.org/project/buster/">Buster</a> that allowed you to generate a static version of a website, but as it was left unsupported someone built a similar tool in node - aptly named the <a href="https://github.com/pseudogram/ghost-static-site-generator">Ghost Static Site Generator</a> (GSSG). I've forked the repo in the off chance that I feel like fixing a bug, or it gets removed [though I doubt it].</p><p>Requirements:</p><ul><li>Node v8 LTS</li><li>wget v1.16</li></ul><p>If you don't have the requirements, and you're a Mac user install <a href="https://brew.sh/">Homebrew</a> because it's a godsend.</p><pre><code class="language-bash"># Install Node
+				<p>I recently moved my blog from AWS to GitHub because it's cheaper and easier to maintain a website <a href="https://jeffhuang.com/designed_to_last/">built to last</a>. Unfortunately, I didn't back up my old blog (rookie mistake, I know) before deleting it. So I'm trying to rewrite some posts based on notes I have in Google Docs/Evernote/Bear. Just bear with me until May 1st.</p><p>Before reading on, there are a few things you may need to understand a little first. None require much reading as I'll explain all the commands I use.</p><ol><li><a href="https://ghost.org/">Ghost</a> blog</li><li><a href="http://github.com">GitHub</a> +<a href="https://guide.freecodecamp.org/git/"> Git</a></li><li><a href="http://docker.com">Docker</a></li><li>Basic bash commands ( <code>cd</code>, <code>mkdir</code> )</li></ol><h3 id="overview">Overview</h3><ol><li>Create a GitHub Repo &amp; Turn on GitHub Pages</li><li>Install Prerequisites</li><li>Running Ghost, using Docker</li><li>Generate a static website</li></ol><h2 id="step-1-create-a-github-repo-turn-on-github-pages">Step 1: Create a GitHub Repo &amp; Turn on GitHub Pages</h2><p>GitHub pages are amazing. They allow you to host a static website in a repo for <strong>free</strong>! Considering that GitHub is also currently home to the largest source of open source code <strong>and</strong> Microsoft owns it, you can put your worries to rest with regards to its spontaneous collapse.</p><ul><li>First, create a repo. If you're using the default GitHub pages URL, then you'll need to name your repo <em>your-github-username.github.io</em> (where my username is pseudogram my repository would be called psuedogram.github.io). Otherwise, if you have a domain, you can name the repo whatever you like.</li><li>In the repo, select the Settings tab.</li></ul><figure class="kg-card kg-image-card"><img src="/content/images/2020/04/image.png" class="kg-image"></figure><ul><li>Scroll down to the GitHub Pages section, and select a source. Here I chose the <strong>master branch /docs </strong>folder for organisation purposes (until a docs folder exists, you won't be able to choose this option).</li></ul><figure class="kg-card kg-image-card"><img src="/content/images/2020/04/Screenshot-2020-03-26-at-11.26.26.png" class="kg-image"></figure><ul><li>Below you'll see an option to add your custom domain [<a href="https://benwiz.io/blog/deploy-github-pages-with-aws-route-53-and-https/">see for AWS</a>] and an option to enforce HTTPS.</li><li>Then clone this repo onto your local machine.</li></ul><h2 id="step-1-install-prerequisites">Step 1: Install Prerequisites</h2><p>There was a python project called <a href="https://pypi.org/project/buster/">Buster</a> that allowed you to generate a static version of a website, but as it was left unsupported someone built a similar tool in node - aptly named the <a href="https://github.com/pseudogram/ghost-static-site-generator">Ghost Static Site Generator</a> (GSSG). I've forked the repo in the off chance that I feel like fixing a bug, or it gets removed [though I doubt it].</p><p>Requirements:</p><ul><li>Node v8 LTS</li><li>wget v1.16</li></ul><p>If you don't have the requirements, and you're a Mac user install <a href="https://brew.sh/">Homebrew</a> because it's a godsend.</p><pre><code class="language-bash"># Install Node
 brew install node
 
 # Install wget
@@ -180,13 +180,13 @@ url =  # Used by Ghost to display previews
 
 -v /path/to/repo/data:/var/lib/ghost/content # Mounts the content from data into the  data from local path given into ghost content file, saving state
 
-ghost: 3.13.3-alpine # creates an image of Ghost using specific image label</code></pre><p>Once you've started the container, you should be able to access your ghost blog at <em>localhost:3001.</em> Then, following the <a href="https://ghost.org/docs/install/ubuntu/">standard instructions</a>, navigate to the admin console by adding <em>/ghost </em>to the URL. Once you're ready, generate a new version of your static website [go to step 4].</p><p>You may want to shut down your unused docker containers — when I leave docker running on and Mac, it turns into a little portable radiator.</p><pre><code class="language-bash">docker container rm --force ghost  # shut down the container, using the label given</code></pre><p>Finally, the next time you start your container there should be no need to enter the long command from earlier — instead, you can start the container using the label you gave the first time (in my case <em>ghost</em>).</p><pre><code class="language-bash">docker start ghost</code></pre><h2 id="step-4-generate-a-static-website">Step 4: Generate a Static Website</h2><p>Once you're ready to save the state of your website — assuming, you're still in website repo, and you've published all of the posts you wish to show the world — you can generate the website using the tool GSSG installed earlier. I've tried a variation of the arguments and below is the best combo I found.</p><pre><code class="language-bash">gssg --domain  --url http://www.your-website-url.com --ignore-absolute-paths --dest docs
+ghost: 3.13.3-alpine # creates an image of Ghost using specific image label</code></pre><p>Once you've started the container, you should be able to access your ghost blog at <em>localhost:3001.</em> Then, following the <a href="https://ghost.org/docs/install/ubuntu/">standard instructions</a>, navigate to the admin console by adding <em>/ghost </em>to the URL. Once you're ready, generate a new version of your static website [go to step 4].</p><p>You may want to shut down your unused docker containers — when I leave docker running on and Mac, it turns into a little portable radiator.</p><pre><code class="language-bash">docker container rm --force ghost  # shut down the container, using the label given</code></pre><p>Finally, the next time you start your container there should be no need to enter the long command from earlier — instead, you can start the container using the label you gave the first time (in my case <em>ghost</em>).</p><pre><code class="language-bash">docker start ghost</code></pre><h2 id="step-4-generate-a-static-website">Step 4: Generate a Static Website</h2><p>Once you're ready to save the state of your website — assuming, you're still in website repo, and you've published all of the posts you wish to show the world — you can generate the website using the tool GSSG installed earlier. I've tried a variation of the arguments and below is the best combo I found.</p><pre><code class="language-bash">gssg --domain  --url  --ignore-absolute-paths --dest docs
 
 
 gssg  # run the ghost static site generator
 --domain   # scrape the website from this URL
 
---url http://www.your-website-url.com  # replace any references to your local address with this URL (GitHub pages or personal domain)
+--url   # replace any references to your local address with this URL (GitHub pages or personal domain)
 
 --ignore-absolute-paths  # swaps all domain names for relative paths, nullifying SEO
 
@@ -231,7 +231,7 @@ gssg  # run the ghost static site generator
 							<i class="icon icon-arrow-right"></i>
 							<h2 class="post-nav-title">What is a Web Server?</h2>
 							<p class="post-nav-excerpt">Simply, a web server processes incoming network requests.&hellip;</p>
-							<p class="post-nav-meta"><time datetime="05-12-2018">05 Dec 2018</time></p>
+							<p class="post-nav-meta"><time datetime="05-12-2017">05 Dec 2017</time></p>
 						</section>
 					</a>
 				<div class="clear"></div>
@@ -271,7 +271,7 @@ gssg  # run the ghost static site generator
 
 	</section>
 
-	<script type="text/javascript" src="/assets/js/script.js?v=fd03cb8458"></script>
+	<script type="text/javascript" src="/assets/js/script.js?v=5c6571b1a4"></script>
 
 	<script>
   $(document).ready(function () {
